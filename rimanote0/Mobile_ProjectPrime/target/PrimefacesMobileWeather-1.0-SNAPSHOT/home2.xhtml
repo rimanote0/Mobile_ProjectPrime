@@ -1,0 +1,72 @@
+    <f:view xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:p="http://primefaces.org/ui"
+            xmlns:pm="http://primefaces.org/mobile"
+            contentType="text/html">
+        
+        <pm:page title="Transfer Data Back Office - POS Mobile">
+
+            <!-- Main View -->
+            <pm:view id="main">
+                <pm:header title="Transfer">
+                    <f:facet name="right">
+                        <p:button value="Settings" icon="gear" href="#settings" />
+                    </f:facet>
+                </pm:header>
+
+                <pm:content>
+                    <h:form id="mainForm">
+                        <h:outputText value="Select Task:" />     
+                                          
+<!--                        <h:selectOneMenu value="#{transforProductCategoryController.task}">
+                            <f:selectItems itemLabel="Label" value="#{transforProductCategoryController.tasks}" />  	
+                        </h:selectOneMenu>-->
+                        
+                        <!-- sepertinya harus pake binding -->
+						
+	                        <h:selectOneMenu value="#{transforProductCategoryController.task}">
+	                            <f:selectItem itemLabel="Transfer Produk Kategori" itemValue="QueryDataAndInsertToProductCategory" />
+                            	<f:selectItem itemLabel="Transfer Produk" itemValue="QueryDataAndInsertToProducts2" /> 
+                            	<f:selectItem itemLabel="Transfer Harga Produk" itemValue="QueryAndDataInsertToProductPrice" />
+                            	<f:selectItem itemLabel="Transfer Stok In Hand" itemValue="QueryDataAndInsertToMStrorageOnHand" />
+                            	<f:selectItem itemLabel="Transfer Transaksi POS" itemValue="CompositeSalesOrderAndOrderLine2" />
+                            	<f:selectItem itemLabel="Transfer Bisnis Partner" itemValue="QueryDataAndInsertToBPartner" />
+	                        </h:selectOneMenu>
+
+                        <p:separator />
+
+                        <p:commandButton value="Run Task" update="display" actionListener="#{runTask}"/>
+                        <p:outputPanel layout="block" style="text-align:center">
+                            <h:outputText id="display" value="#{tasks}" />
+                        </p:outputPanel>
+                    </h:form>
+                </pm:content>
+            </pm:view>
+
+            <!-- Settings View -->
+            <pm:view id="settings">
+                <pm:header title="Weather">
+                    <f:facet name="left"><p:button value="Back" icon="back" href="#main?reverse=true"/></f:facet>
+                </pm:header>
+
+                <pm:content>
+                    <h:form id="settingsForm">
+
+                        <h:outputText value="Select Unit:" />
+                        <h:selectOneMenu value="#{weatherController.unit}">
+                            <f:selectItem itemLabel="Celcius" itemValue="c" />
+                            <f:selectItem itemLabel="Fahrenheit" itemValue="f" />
+                        </h:selectOneMenu>
+
+                        <p:separator />
+
+                        <p:commandButton value="Save" actionListener="#{weatherController.saveSettings}" update=":mainForm:display"
+                                         action="pm:main"/>
+                    </h:form>
+                </pm:content>
+            </pm:view>
+
+        </pm:page>
+
+    </f:view>
